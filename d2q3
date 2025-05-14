@@ -1,0 +1,26 @@
+import java.util.HashSet;
+
+class EmailManager {
+    HashSet<String> emails = new HashSet<>();
+
+    void add(String email) {
+        emails.add(email);
+    }
+
+    void show() {
+        for (String e : emails) {
+            System.out.println(e);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        EmailManager em = new EmailManager();
+        em.add("aditi@gmail.com");
+        em.add("ravi@yahoo.com");
+        em.add("aditi@gmail.com");  // duplicate
+        em.add("john@gmail.com");
+        em.show();
+    }
+}

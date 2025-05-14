@@ -1,0 +1,53 @@
+import java.util.ArrayList;
+
+class Student {
+    int id;
+    String name;
+    String grade;
+
+    Student(int id, String name, String grade) {
+        this.id = id;
+        this.name = name;
+        this.grade = grade;
+    }
+}
+
+class StudentManager {
+    ArrayList<Student> list = new ArrayList<>();
+
+    void add(int id, String name, String grade) {
+        list.add(new Student(id, name, grade));
+    }
+
+    void remove(int id) {
+        list.removeIf(s -> s.id == id);
+    }
+
+    void search(int id) {
+        for (Student s : list) {
+            if (s.id == id) {
+                System.out.println("Found: " + s.name + ", Grade: " + s.grade);
+                return;
+            }
+        }
+        System.out.println("Student not found");
+    }
+
+    void showAll() {
+        for (Student s : list) {
+            System.out.println(s.id + " - " + s.name + " - " + s.grade);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        StudentManager sm = new StudentManager();
+        sm.add(1, "Aditi", "A");
+        sm.add(2, "Ravi", "B");
+        sm.showAll();
+        sm.search(2);
+        sm.remove(1);
+        sm.showAll();
+    }
+}

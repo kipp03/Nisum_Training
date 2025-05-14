@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+
+class Item {
+    String name;
+    double price;
+    int quantity;
+
+    Item(String name, double price, int quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+
+class Cart {
+    ArrayList<Item> items = new ArrayList<>();
+
+    void addItem(String name, double price, int quantity) {
+        items.add(new Item(name, price, quantity));
+    }
+
+    void removeItem(String name) {
+        items.removeIf(item -> item.name.equalsIgnoreCase(name));
+    }
+
+    void viewItems() {
+        for (Item item : items) {
+            System.out.println(item.name + " - ₹" + item.price + " x " + item.quantity);
+        }
+    }
+
+    double calculateTotal() {
+        double total = 0;
+        for (Item item : items) {
+            total += item.price * item.quantity;
+        }
+        return total;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Cart cart = new Cart();
+        cart.addItem("Pen", 10, 2);
+        cart.addItem("Notebook", 50, 1);
+        cart.viewItems();
+        System.out.println("Total: ₹" + cart.calculateTotal());
+        cart.removeItem("Pen");
+        cart.viewItems();
+    }
+}

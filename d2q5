@@ -1,0 +1,53 @@
+import java.util.Stack;
+
+class BrowserHistory {
+    Stack<String> history = new Stack<>();
+
+    void visit(String url) {
+        history.push(url);
+        System.out.println("Visited: " + url);
+    }
+
+    void back() {
+        if (!history.isEmpty()) {
+            String removed = history.pop();
+            System.out.println("Back from: " + removed);
+        } else {
+            System.out.println("No browsing history to go back.");
+        }
+    }
+
+    void currentPage() {
+        if (!history.isEmpty()) {
+            System.out.println("Current page: " + history.peek());
+        } else {
+            System.out.println("No page open.");
+        }
+    }
+
+    void showHistory() {
+        if (history.isEmpty()) {
+            System.out.println("History is empty.");
+            return;
+        }
+        System.out.println("Browsing History:");
+        for (String url : history) {
+            System.out.println(url);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BrowserHistory browser = new BrowserHistory();
+
+        browser.visit("google.com");
+        browser.visit("youtube.com");
+        browser.visit("wikipedia.org");
+
+        browser.currentPage();
+        browser.back();
+        browser.currentPage();
+        browser.showHistory();
+    }
+}

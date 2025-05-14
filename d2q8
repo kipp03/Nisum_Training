@@ -1,0 +1,59 @@
+import java.util.*;
+
+class MenuItem {
+    String name;
+    String description;
+    double price;
+
+    MenuItem(String name, String description, double price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
+    public String toString() {
+        return name + " - " + description + " ($" + price + ")";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashMap<String, HashMap<String, MenuItem>> menu = new LinkedHashMap<>();
+
+        addItem(menu, "Appetizer", new MenuItem("Spring Roll", "Crispy rolls", 5.99));
+        addItem(menu, "Main Course", new MenuItem("Paneer Butter Masala", "Rich and creamy", 12.49));
+        addItem(menu, "Dessert", new MenuItem("Gulab Jamun", "Sweet and soft", 3.99));
+        addItem(menu, "Appetizer", new MenuItem("Samosa", "Spicy and crispy", 4.49));
+
+        updateItem(menu, "Main Course", "Paneer Butter Masala", 13.49);
+        removeItem(menu, "Dessert", "Gulab Jamun");
+
+        displayMenu(menu);
+    }
+
+    static void addItem(LinkedHashMap<String, HashMap<String, MenuItem>> menu, String category, MenuItem item) {
+        menu.putIfAbsent(category, new HashMap<>());
+        menu.get(category).put(item.name, item);
+    }
+
+    static void removeItem(LinkedHashMap<String, HashMap<String, MenuItem>> menu, String category, String itemName) {
+        if (menu.containsKey(category)) {
+            menu.get(category).remove(itemName);
+        }
+    }
+
+    static void updateItem(LinkedHashMap<String, HashMap<String, MenuItem>> menu, String category, String itemName, double newPrice) {
+        if (menu.containsKey(category) && menu.get(category).containsKey(itemName)) {
+            menu.get(category).get(itemName).price = newPrice;
+        }
+    }
+
+    static void displayMenu(LinkedHashMap<String, HashMap<String, MenuItem>> menu) {
+        for (String category : menu.keySet()) {
+            System.out.println(category + ":");
+            for (MenuItem item : menu.get(category).values()) {
+                System.out.println("  " + item);
+            }
+        }
+    }
+}
